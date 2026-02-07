@@ -40,7 +40,7 @@ docker compose up -d nginx
 
 OBS: olhar os logs e não deve estar apontando nenhum erro (docker logs nginx)
 
-* 3 - Executar o comando para instalar o certificado inicial (só é preciso fazer na primeira instalação):
+* 4 - Executar o comando para instalar o certificado inicial (só é preciso fazer na primeira instalação):
 
 ```sh
 docker compose run --rm --entrypoint certbot certbot certonly --webroot --webroot-path=/var/www/certbot --email email@seusite.com.br --agree-tos --no-eff-email -d n8n.seusite.com.br --verbose
@@ -48,13 +48,13 @@ docker compose run --rm --entrypoint certbot certbot certonly --webroot --webroo
 
 **IMPORTANTE**: A porta 80 deve estar liberada no firewall da VPS
 
-* 4 - Parar o nginx
+* 5 - Parar o nginx
 
 ```sh
 docker compose down nginx
 ```
 
-* 5 - Alterar o arquivo nginx.conf para versão final com SSL. Exemplo abaixo:
+* 6 - Alterar o arquivo nginx.conf para versão final com SSL. Exemplo abaixo:
 
 ```nginx
 server {
@@ -99,10 +99,10 @@ server {
     }
 }
 ```
-* 6 - Subir novamente o nginx com o certbot
+* 7 - Subir novamente o nginx com o certbot
 
 ```sh
 docker compose up -d
 ```
 
-* 7 - Liberar a porta 443 no firewall da VPS
+* 8 - Liberar a porta 443 no firewall da VPS
