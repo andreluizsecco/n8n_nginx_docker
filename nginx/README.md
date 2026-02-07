@@ -46,7 +46,15 @@ OBS: olhar os logs e não deve estar apontando nenhum erro (docker logs nginx)
 docker compose run --rm --entrypoint certbot certbot certonly --webroot --webroot-path=/var/www/certbot --email email@seusite.com.br --agree-tos --no-eff-email -d n8n.seusite.com.br --verbose
 ```
 
-* 4 - Alterar o arquivo nginx.conf para versão final com SSL. Exemplo abaixo:
+**IMPORTANTE**: A porta 80 deve estar liberada no firewall da VPS
+
+* 4 - Parar o nginx
+
+```sh
+docker compose down nginx
+```
+
+* 5 - Alterar o arquivo nginx.conf para versão final com SSL. Exemplo abaixo:
 
 ```nginx
 server {
@@ -91,5 +99,10 @@ server {
     }
 }
 ```
+* 6 - Subir novamente o nginx com o certbot
 
-* 5 - Liberar a porta 443 no firewall da VPS
+```sh
+docker compose up -d
+```
+
+* 7 - Liberar a porta 443 no firewall da VPS
